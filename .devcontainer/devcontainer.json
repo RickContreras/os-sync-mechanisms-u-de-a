@@ -1,0 +1,42 @@
+{
+  "name": "OS Synchronization Lab",
+  "image": "mcr.microsoft.com/devcontainers/cpp:1-ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "C_Cpp.default.cppStandard": "c17",
+        "C_Cpp.default.cStandard": "c17",
+        "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+        "C_Cpp.default.includePath": [
+          "${workspaceFolder}/src/**"
+        ],
+        "C_Cpp.default.defines": [
+          "_GNU_SOURCE",
+          "_REENTRANT"
+        ],
+        "files.associations": {
+          "*.h": "c",
+          "*.c": "c"
+        }
+      },
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cmake-tools",
+        "golang.go",
+        "ms-vscode.hexeditor",
+        "vadimcn.vscode-lldb"
+      ]
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y valgrind gdb build-essential libc6-dbg",
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+  "workspaceFolder": "/workspace"
+}
