@@ -143,39 +143,66 @@ void *consumer_thread(void *arg) {
 /**
  * @brief Test basic queue operations
  */
-void test_basic_operations() {
-    safe_printf("\n=== Testing Basic Operations ===\n");
+int test_basic_operations() {
+    printf("\n=== Testing Basic Operations ===\n");
     
-    ThreadSafeQueue q;
-    assert(queue_init(&q, 3) == 0);
+    ThreadSafeQueue queue;
+    if (init_queue(&queue) != 0) {
+        printf("Failed to initialize queue\n");
+        return -1;
+    }
+    
+    // Test enqueue operations
+    for (int i = 0; i < 5; i++) {
+        if (enqueue(&queue, i * 10) != 0) {
+            printf("Failed to enqueue item %d\n", i);
+            destroy_queue(&queue);
+            return -1;
+        }
+    }
+    
+    // Test size
+    if (get_queue_size(&queue) != 5) {
+        printf("Expected size 5, got %d\n", get_queue_size(&queue));
+        destroy_queue(&queue);
+        return -1;
+    }
+    
+    // Test dequeue operations
+    for (int i = 0; i < 5; i++) {
+        int item;
+        if (dequeue(&queue, &item) != 0) {
+            printf("Failed to dequeue item %d\n", i);
+            destroy_queue(&queue);
+            return -1;
+        }
+        
+        int expected = i * 10;
+        if (item != expected) {
+            printf("Expected %d, got %d\n", expected, item);
+            destroy_queue(&queue);
+            return -1;
+        }
+    }
     
     // Test empty queue
-    assert(queue_is_empty(&q) == true);
-    assert(queue_is_full(&q) == false);
-    assert(queue_size(&q) == 0);
+    if (get_queue_size(&queue) != 0) {
+        printf("Expected empty queue, size is %d\n", get_queue_size(&queue));
+        destroy_queue(&queue);
+        return -1;
+    }
     
-    // Test enqueue
-    assert(enqueue_nonblocking(&q, 10) == 0);
-    assert(enqueue_nonblocking(&q, 20) == 0);
-    assert(enqueue_nonblocking(&q, 30) == 0);
-    
-    // Test full queue
-    assert(queue_is_full(&q) == true);
-    assert(queue_size(&q) == 3);
-    assert(enqueue_nonblocking(&q, 40) == -1); // Should fail
-    
-    // Test dequeue
+    // Test dequeue from empty queue
     int item;
-    assert(dequeue_nonblocking(&q, &item) == 0 && item == 10);
-    assert(dequeue_nonblocking(&q, &item) == 0 && item == 20);
-    assert(dequeue_nonblocking(&q, &item) == 0 && item == 30);
+    if (dequeue(&queue, &item) == 0) {
+        printf("Dequeue from empty queue should fail\n");
+        destroy_queue(&queue);
+        return -1;
+    }
     
-    // Test empty queue
-    assert(queue_is_empty(&q) == true);
-    assert(dequeue_nonblocking(&q, &item) == -1); // Should fail
-    
-    queue_destroy(&q);
-    safe_printf("Basic operations test: PASSED\n");
+    destroy_queue(&queue);
+    printf("Basic operations test: PASSED\n");
+    return 0;
 }
 
 /**
