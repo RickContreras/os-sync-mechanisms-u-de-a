@@ -1,0 +1,87 @@
+# Build artifacts
+build/
+*.o
+*.so
+*.a
+*.exe
+
+# Output files
+output/
+*.txt
+*.log
+
+# Debugging files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+core.*
+vgcore.*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.idea/
+
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Test coverage
+*.cover
+*.coverprofile
+
+# Valgrind output
+valgrind-out.*
+massif.out.*
+callgrind.out.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Binary files (but allow in specific directories if needed)
+queue_test
+pc_test
+philosophers_test
+
+# Documentation build
+docs/_build/
+docs/html/
+docs/latex/
+
+# Performance profiling
+perf.data*
+*.prof
+
+# Address Sanitizer
+*_asan
+*_tsan
+*_msan
+
+# CMake files (if using CMake in the future)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile.cmake
