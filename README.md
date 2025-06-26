@@ -60,10 +60,9 @@ os-synchronization-lab/
   - Uso de mutex y variables de condición
   - Operaciones bloqueantes y no-bloqueantes
   - Tests unitarios y multi-threading
-
-### 🚧 Por Implementar
 - **Tarea 2**: Productor-Consumidor con semáforos
 - **Tarea 3**: Filósofos Cenando
+### 🚧 Por Implementar
 - **Implementaciones en Go**
 
 ## 🧪 Testing
