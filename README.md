@@ -178,18 +178,6 @@ gdb ./build/queue_test
 
 ## 🔄 Próximos Pasos
 
-### Implementar Task 2 - Producer-Consumer
-1. Crear `src/task2_producer_consumer/`
-2. Implementar con semáforos (`sem_t`)
-3. Manejar buffer de tamaño fijo
-4. Tests con múltiples productores/consumidores
-
-### Implementar Task 3 - Dining Philosophers
-1. Crear `src/task3_dining_philosophers/`
-2. Prevenir deadlocks y starvation
-3. Usar diferentes estrategias de solución
-4. Tests con 5 filósofos
-
 ### Mejoras Adicionales
 - Implementaciones en Go
 - Benchmarks de rendimiento
